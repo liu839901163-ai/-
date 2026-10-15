@@ -1,0 +1,19 @@
+# This blueprint requests paid resources. Review Render's current price before deploying.
+services:
+  - type: web
+    name: product-studio
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: STUDIO_DATA_DIR
+        value: /var/lib/studio
+      - key: STUDIO_ACCESS_PASSWORD
+        generateValue: true
+    disk:
+      name: studio-data
+      mountPath: /var/lib/studio
+      sizeGB: 1
